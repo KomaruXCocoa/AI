@@ -1,0 +1,35 @@
+import requests
+
+def ask_ai(question):
+    """
+    Send a question to the AI model and get a response.
+    """
+    # URL of the AI model API
+    ai_url = "http://example-ai-model.com/api"
+
+    # Payload with the question
+    payload = {
+        "question": question
+    }
+
+    # Send a POST request to the AI API
+    response = requests.post(ai_url, json=payload)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Extract the AI's answer
+        ai_answer = response.json().get('answer', 'No answer found.')
+        return ai_answer
+    else:
+        return "Error: Unable to get a response from the AI model."
+
+# Main execution
+if __name__ == "__main__":
+    # Take input from the user
+    user_question = input("Ask a question to the AI: ")
+
+    # Get the AI's response
+    ai_response = ask_ai(user_question)
+
+    # Print the AI's response
+    print(f"AI says: {ai_response}")
